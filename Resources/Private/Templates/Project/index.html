@@ -1,0 +1,22 @@
+<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">PROJECTS</h1></div>
+<p class="bodytext">Here is a list of projects available for translation:</p>
+<table border="1">
+    <tr>
+        <th>#</th>
+        <th>Project name</th>
+        <th>Project description</th>
+    </tr>
+<f:for each="{projects}" as="project">
+    <tr>
+        <td>{project.num}</td>
+        <td>
+            <f:link.action controller="Part" action="index" arguments="{project : project}">
+                {project.name}
+            </f:link.action>
+        </td>
+        <td>
+            {project.description}
+        </td>
+    </tr>
+</f:for>
+</table>

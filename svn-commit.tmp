@@ -1,0 +1,8 @@
+l10n server extansion basic functionality(using extbase, new MVC system):
+- Extension directory tree, config files
+- Translate plugin: two controllers w/fluid templates + model
+
+Andriy Kushnarov
+--This line, and those below, will be ignored--
+
+A    .
