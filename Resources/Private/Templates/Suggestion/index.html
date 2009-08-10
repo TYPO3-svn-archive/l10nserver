@@ -1,0 +1,12 @@
+<f:for each="{list}" as="item" key="key">
+    <f:if condition="{index}%2">
+        <f:then>
+            even
+        </f:then>
+        <f:else>
+            odd
+        </f:else>
+    </f:if>: {item}
+</f:for>
+
+<f:form.submit value="{f:translate('Update' key='update')}" />

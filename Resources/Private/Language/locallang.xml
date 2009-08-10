@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the blogexample extension</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+            <label index="back">&lt;&lt; Back</label>
+            <label index="update">Update</label>
+
+			<label index="list_of_projects">Here is a list of projects:</label>
+			<label index="list_of_parts">Here is a list of project parts for project:</label>
+			<label index="list_of_labels">List of labels:</label>
+
+			<label index="num">#</label>
+			<label index="project_name">Project name</label>
+			<label index="project_description">Project description</label>
+
+			<label index="part_name">Part name</label>
+			<label index="part_description">Part description</label>
+
+			<label index="english_text">English text</label>
+			<label index="approved_translation">Approved translation</label>
+			<label index="translate">Translate</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="read_more">weiterlesen >></label>
+			<label index="label_recent_posts">Die letzten Einträge:</label>
+		</languageKey>
+	</data>
+</T3locallang>

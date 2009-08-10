@@ -1,0 +1,26 @@
+<h1 class="bodytext">
+    <f:translate key="list_of_parts">Here is a list of project parts for project:</f:translate> "{project.name}"
+</h1>
+<table border="1">
+    <tr>
+        <th><f:translate key="num">#</f:translate></th>
+        <th><f:translate key="part_name">Part name</f:translate></th>
+        <th><f:translate key="part_description">Part description</f:translate></th>
+    </tr>
+    <f:for each="{parts}" as="part">
+        <tr>
+            <td>{part.num}</td>
+            <td>
+                <f:link.action controller="Label" action="index" arguments="{project: project, part : part}">
+                    {part.name}
+                </f:link.action>
+            </td>
+            <td>
+                {part.description}
+            </td>
+        </tr>
+    </f:for>
+</table>
+<f:link.action controller="Project" action="index">
+    <f:translate key="back">&lt;&lt; Back</f:translate>
+</f:link.action>

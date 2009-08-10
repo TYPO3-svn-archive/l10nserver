@@ -1,0 +1,21 @@
+<h1 class="bodytext"><f:translate key="list_of_projects">Here is a list of projects:</f:translate></h1>
+<table border="1">
+    <tr>
+        <th><f:translate key="num">#</f:translate></th>
+        <th><f:translate key="project_name">Project name</f:translate></th>
+        <th><f:translate key="project_description">Project description</f:translate></th>
+    </tr>
+<f:for each="{projects}" as="project" key="key">
+    <tr class='row_<f:if condition="{index}%2"><f:then>even</f:then><f:else>odd</f:else></f:if>'>
+        <td>{project.num}</td>
+        <td>
+            <f:link.action controller="Part" action="index" arguments="{project : project}">
+                {project.name}
+            </f:link.action>
+        </td>
+        <td>
+            {project.description}
+        </td>
+    </tr>
+</f:for>
+</table>
