@@ -1,7 +1,7 @@
 <?php
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	$_EXTKEY,
 	'Pi1',
 	array(
@@ -15,7 +15,7 @@ Tx_Extbase_Utility_Plugin::configureDispatcher(
     )
 );
 
-Tx_Extbase_Utility_Plugin::configureDispatcher(
+Tx_Extbase_Utility_Extension::configureDispatcher(
 	$_EXTKEY,
 	'Pi2',
 	array(

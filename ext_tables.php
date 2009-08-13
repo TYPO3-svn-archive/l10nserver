@@ -1,13 +1,13 @@
 <?php
 if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
-Tx_Extbase_Utility_Plugin::registerPlugin(
+Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Pi1',
 	'L10n Server: Translate'
 );
 
-Tx_Extbase_Utility_Plugin::registerPlugin(
+Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Pi2',
 	'L10n Server: Manage'
@@ -25,9 +25,9 @@ $TCA['tx_l10nserver_domain_model_project'] = array (
 		'versioningWS' 		=> 2,
 		'versioning_followPages'	=> true,
 		'origUid' 			=> 't3_origuid',
-		'languageField' 	=> 'sys_language_uid',	
-		'transOrigPointerField' 	=> 'l18n_parent',	
-		'transOrigDiffSourceField' 	=> 'l18n_diffsource',	
+		'languageField' 	=> 'sys_language_uid',
+		'transOrigPointerField' 	=> 'l18n_parent',
+		'transOrigDiffSourceField' 	=> 'l18n_diffsource',
 		'prependAtCopy' 	=> 'LLL:EXT:lang/locallang_general.xml:LGL.prependAtCopy',
 		'copyAfterDuplFields' 		=> 'sys_language_uid',
 		'useColumnsForDefaultValues' => 'sys_language_uid',
@@ -50,9 +50,9 @@ $TCA['tx_l10nserver_domain_model_part'] = array (
 		'versioningWS' 		=> 2,
 		'versioning_followPages'	=> true,
 		'origUid' 			=> 't3_origuid',
-		'languageField' 	=> 'sys_language_uid',	
-		'transOrigPointerField' 	=> 'l18n_parent',	
-		'transOrigDiffSourceField' 	=> 'l18n_diffsource',	
+		'languageField' 	=> 'sys_language_uid',
+		'transOrigPointerField' 	=> 'l18n_parent',
+		'transOrigDiffSourceField' 	=> 'l18n_diffsource',
 		'prependAtCopy' 	=> 'LLL:EXT:lang/locallang_general.xml:LGL.prependAtCopy',
 		'copyAfterDuplFields' 		=> 'sys_language_uid',
 		'useColumnsForDefaultValues' => 'sys_language_uid',
@@ -75,9 +75,9 @@ $TCA['tx_l10nserver_domain_model_label'] = array (
 		'versioningWS' 		=> 2,
 		'versioning_followPages'	=> true,
 		'origUid' 			=> 't3_origuid',
-		'languageField' 	=> 'sys_language_uid',	
-		'transOrigPointerField' 	=> 'l18n_parent',	
-		'transOrigDiffSourceField' 	=> 'l18n_diffsource',	
+		'languageField' 	=> 'sys_language_uid',
+		'transOrigPointerField' 	=> 'l18n_parent',
+		'transOrigDiffSourceField' 	=> 'l18n_diffsource',
 		'prependAtCopy' 	=> 'LLL:EXT:lang/locallang_general.xml:LGL.prependAtCopy',
 		'copyAfterDuplFields' 		=> 'sys_language_uid',
 		'useColumnsForDefaultValues' => 'sys_language_uid',
@@ -100,9 +100,9 @@ $TCA['tx_l10nserver_domain_model_suggestion'] = array (
 		'versioningWS' 		=> 2,
 		'versioning_followPages'	=> true,
 		'origUid' 			=> 't3_origuid',
-		'languageField' 	=> 'sys_language_uid',	
-		'transOrigPointerField' 	=> 'l18n_parent',	
-		'transOrigDiffSourceField' 	=> 'l18n_diffsource',	
+		'languageField' 	=> 'sys_language_uid',
+		'transOrigPointerField' 	=> 'l18n_parent',
+		'transOrigDiffSourceField' 	=> 'l18n_diffsource',
 		'prependAtCopy' 	=> 'LLL:EXT:lang/locallang_general.xml:LGL.prependAtCopy',
 		'copyAfterDuplFields' 		=> 'sys_language_uid',
 		'useColumnsForDefaultValues' => 'sys_language_uid',
