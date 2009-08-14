@@ -9,9 +9,11 @@ Tx_Extbase_Utility_Extension::configureDispatcher(
         'Part' => 'index',
         'Label' => 'index',
         'Suggestion' => 'add',
+        'Cache' => 'loadFromFile',
 	),
     array(
         'Suggestion' => 'add',
+        'Cache' => 'loadFromFile',
     )
 );
 

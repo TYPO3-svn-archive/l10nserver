@@ -29,5 +29,5 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
-class Tx_L10nServer_Domain_Model_LabelRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_L10nServer_Domain_Repository_LabelRepository extends Tx_Extbase_Persistence_Repository {
 }

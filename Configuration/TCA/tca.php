@@ -150,7 +150,7 @@ $TCA['tx_l10nserver_domain_model_part'] = array(
 $TCA['tx_l10nserver_domain_model_label'] = array(
 	'ctrl' => $TCA['tx_l10nserver_domain_model_label']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, name, description, suggestions, num'
+		'showRecordFieldList' => 'hidden, name, description, filepath, suggestions, num'
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -171,6 +171,16 @@ $TCA['tx_l10nserver_domain_model_label'] = array(
 			)
 		),
 		'description' => array(
+			'exclude' => 0,
+			'label'   => 'LLL:EXT:l10nserver/Resources/Private/Language/locallang_db.xml:tx_l10nserver_domain_model_part.title',
+			'config'  => array(
+				'type' => 'input',
+				'size' => 20,
+				'eval' => 'trim, required',
+				'max'  => 256
+			)
+		),
+		'filepath' => array(
 			'exclude' => 0,
 			'label'   => 'LLL:EXT:l10nserver/Resources/Private/Language/locallang_db.xml:tx_l10nserver_domain_model_part.title',
 			'config'  => array(
@@ -238,7 +248,7 @@ $TCA['tx_l10nserver_domain_model_label'] = array(
 		),
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden, title, description, suggestions, num, approved_translation, user_suggestion')
+		'1' => array('showitem' => 'hidden, title, description, filepath, suggestions, num, approved_translation, user_suggestion')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')

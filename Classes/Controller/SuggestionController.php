@@ -43,6 +43,8 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
 	 * @return void
 	 */
 	public function initializeAction() {		
+        session_start();
+
 		$this->suggestionRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_SuggestionRepository');
 	}
 

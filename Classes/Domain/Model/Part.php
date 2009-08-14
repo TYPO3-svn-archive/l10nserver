@@ -74,8 +74,13 @@ class Tx_L10nServer_Domain_Model_Part extends Tx_Extbase_DomainObject_AbstractEn
      *
      * @return
 	 */
-	public function __construct() {
+	public function __construct($name = '', $description = '') {
+        if (!empty($name)) {
+            $this->name = $name;
+            $this->description = $description;
+        }
 	}	
+    
 	
 	/**
 	 * Sets the uid of the blog this post is related to

@@ -56,6 +56,13 @@ class Tx_L10nServer_Domain_Model_Label extends Tx_Extbase_DomainObject_AbstractE
 	protected $description = '';
 
 	/**
+     * Path to file containing the translation XML
+     *
+	 * @var string
+	 */
+	protected $filepath = '';
+
+	/**
      * Suggestions for translation
      *
 	 * @var array
@@ -79,7 +86,12 @@ class Tx_L10nServer_Domain_Model_Label extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Constructs this label
 	 */
-	public function __construct() {
+	public function __construct($name = '', $description = '', $filepath = '') {
+        if (!empty($name)) {
+            $this->name = $name;
+            $this->description = $description;
+            $this->filepath = $filepath;
+        }
 	}	
 
     public function makeSuggestionRepository() {

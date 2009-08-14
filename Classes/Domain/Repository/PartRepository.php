@@ -32,5 +32,5 @@
  * @scope prototype
  * @entity
  */
-class Tx_L10nServer_Domain_Model_PartRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_L10nServer_Domain_Repository_PartRepository extends Tx_Extbase_Persistence_Repository {
 }

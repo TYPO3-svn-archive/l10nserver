@@ -100,6 +100,7 @@ CREATE TABLE tx_l10nserver_domain_model_label (
 
     name varchar(255) DEFAULT '' NOT NULL,
     description text NOT NULL,
+    filepath text NOT NULL,
 
     part_uid int(11) DEFAULT '0' NOT NULL,
 	part_table tinytext NOT NULL,

@@ -67,8 +67,12 @@ class Tx_L10nServer_Domain_Model_Project extends Tx_Extbase_DomainObject_Abstrac
 	 *
 	 * @return
 	 */
-	public function __construct() {
-	}
+	public function __construct($name = '', $description = '') {
+        if (!empty($name)) {
+            $this->name = $name;
+            $this->description = $description;
+        }
+	}	
 	
 	/**
 	 * Sets this project's name
