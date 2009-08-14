@@ -14,7 +14,10 @@
             </f:link.action>
         </td>
         <td>
-            {project.description}
+            <f:if condition="{project.description}">
+                <f:then>{project.description}</f:then>
+                <f:else>&nbsp;</f:else>
+            </f:if>
         </td>
     </tr>
 </f:for>

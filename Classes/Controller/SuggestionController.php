@@ -67,8 +67,8 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
         $added = false;
         $userSuggestions = $this->request->getArguments();
 
-        $userId = $_SESSION['l10nserver']['user_id']; // TODO: user:test1
-        $langId = $_SESSION['l10nserver']['lang_id']; // TODO: lang:UKR
+        $userId = $_SESSION['l10nserver']['user_id'];
+        $langId = $_SESSION['l10nserver']['lang_id'];
 
         var_dump($userId, $langId);echo "<HR />";
         foreach ($userSuggestions['suggestion'] as $labelId => $suggestion) {
@@ -98,7 +98,6 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
         /**
          * After suggestions are added redirect to labels list
          */
-        //  *TODO*: LLL write message success or error !!! 
         $this->redirect('index', 'Label', NULL, 
             array('project' => $project, 'part' => $part, 'suggestions_are_added' => $added));
 	}

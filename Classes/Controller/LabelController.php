@@ -48,11 +48,7 @@ class Tx_L10nServer_Controller_LabelController extends Tx_Extbase_MVC_Controller
         session_start();
 
         $_SESSION['l10nserver']['lang_id'] = 2;
-        $_SESSION['l10nserver']['user_id'] = 4;
-
-        //  *TODO*!!!
-		//$this->translatorRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_TranslatorRepository');
-		//$this->translatorRepository = t3lib_div::makeInstance('Tx_Extbase_Domain_Repository_FrontendUserRepository');
+        $_SESSION['l10nserver']['user_id'] = 1;
 	}
 
 	/**

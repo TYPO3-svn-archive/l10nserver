@@ -16,7 +16,10 @@
                 </f:link.action>
             </td>
             <td>
-                {part.description}
+                <f:if condition="{part.description}">
+                    <f:then>{part.description}</f:then>
+                    <f:else>&nbsp;</f:else>
+                </f:if>
             </td>
         </tr>
     </f:for>
