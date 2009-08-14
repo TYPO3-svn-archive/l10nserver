@@ -61,8 +61,6 @@ class Tx_L10nServer_Controller_LabelController extends Tx_Extbase_MVC_Controller
 	public function indexAction(Tx_L10nServer_Domain_Model_Project $project, Tx_L10nServer_Domain_Model_Part $part, $added = false) {
         $this->view->assign('suggestions_are_added', $added);
 
-        var_dump($_SESSION);
-
         $this->view->assign('project', $project);
         $this->view->assign('part', $part);
 		$this->view->assign('labels', $part->getLabels());

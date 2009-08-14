@@ -70,7 +70,6 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
         $userId = $_SESSION['l10nserver']['user_id'];
         $langId = $_SESSION['l10nserver']['lang_id'];
 
-        var_dump($userId, $langId);echo "<HR />";
         foreach ($userSuggestions['suggestion'] as $labelId => $suggestion) {
             if (empty($suggestion)) {
                 continue;

@@ -7,7 +7,8 @@ define(L10N_CACHE_FILE, TYPO3ROOT. '/typo3conf/ext/l10nserver/l10n_cache.txt');
 
 class locallang_files {
 
-    protected $listOfExtDirs = array('typo3/sysext/', 'typo3/ext/', 'typo3conf/ext/');
+    //protected $listOfExtDirs = array('typo3/sysext/', 'typo3/ext/', 'typo3conf/ext/');
+    protected $listOfExtDirs = array('typo3conf/ext/');
 
     protected $listOfLocallangFiles = array();
 
