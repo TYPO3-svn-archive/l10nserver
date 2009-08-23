@@ -67,7 +67,9 @@ class Tx_L10nServer_Controller_CacheController extends Tx_Extbase_MVC_Controller
                     
                     foreach ($files as $file => $labels) {
                         foreach ($labels as $name => $description) {
-                            //  *TODO*: fix (quotes ?)
+                            //  *TODO*: fix (quotes ?): Update ExtBase ?
+
+                            $description = preg_replace("/'/", "\\'", $description);
                             $label = t3lib_div::makeInstance('Tx_L10nServer_Domain_Model_Label', 
                                 $name, $description, $file);
                             
@@ -83,7 +85,7 @@ class Tx_L10nServer_Controller_CacheController extends Tx_Extbase_MVC_Controller
 
             //unlink(L10N_CACHE_FILE);
         }
-
+        
         $this->redirect('index', 'Project');
 	}
 }

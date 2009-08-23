@@ -84,9 +84,28 @@ class Tx_L10nServer_Domain_Model_Label extends Tx_Extbase_DomainObject_AbstractE
 	protected $approved_translation = '';
 
 	/**
+     * Suggestions to be approved
+     *
+	 * @var array
+	 */
+	protected $suggestionsToApprove = array();
+
+	/**
+     * Project > Part
+     *
+	 * @var string
+	 */
+	protected $projectPart = '';
+
+    protected $projectRepository;
+    protected $partRepository;
+
+	/**
 	 * Constructs this label
 	 */
 	public function __construct($name = '', $description = '', $filepath = '') {
+        parent::__construct();
+
         if (!empty($name)) {
             $this->name = $name;
             $this->description = $description;
@@ -104,6 +123,29 @@ class Tx_L10nServer_Domain_Model_Label extends Tx_Extbase_DomainObject_AbstractE
 
         return $suggestionRepository;
     }
+
+    public function makeProjectRepository() {
+        static $projectRepository;
+
+        if (empty($projectRepository) 
+            || ! ($projectRepository instanceof Tx_L10nServer_Domain_Repository_ProjectRepository)) {
+           $projectRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_ProjectRepository');
+        }
+
+        return $projectRepository;
+    }
+
+    public function makePartRepository() {
+        static $partRepository;
+
+        if (empty($partRepository) 
+            || ! ($partRepository instanceof Tx_L10nServer_Domain_Repository_PartRepository)) {
+           $partRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_PartRepository');
+        }
+
+        return $partRepository;
+    }
+
 	
 	/**
 	 * Sets the uid of the blog this post is related to
@@ -236,6 +278,55 @@ class Tx_L10nServer_Domain_Model_Label extends Tx_Extbase_DomainObject_AbstractE
                 $_SESSION['l10nserver']['lang_id']);
 
         return !empty($suggestion) ? $suggestion->getSuggestion() : '';
+	}
+
+	/**
+	 * Sets suggestions to be approved
+	 *
+	 * @param array $suggestions
+	 * @return void
+	 */
+	public function setSuggestionsToApprove($suggestions) {
+		$this->suggestionsToApprove = $suggestions;
+	}
+
+	/**
+	 * Returns the uid of the part this label is related to
+	 *
+	 * @return array
+	 */
+	public function getSuggestionsToApprove() {
+		return $this->suggestionsToApprove;
+	}
+
+	/**
+	 * Sets project > part
+	 *
+	 * @param string $projectPart
+	 * @return void
+	 */
+	public function setProjectPart($projectPart = '') {
+        if (!empty($projectPart)) {
+		    $this->projectPart = $projectPart;
+        } else {
+            $part = $this->makePartRepository()
+                ->findByUid(intval($this->getPartUid()));
+
+            $project = $this->makeProjectRepository()
+                ->findByUid(intval($part->getProjectUid()));
+
+            $this->projectPart = sprintf('%s > %s', 
+                $project->getName(), $part->getName());
+        }
+	}
+
+	/**
+	 * Returns project > part
+	 *
+	 * @return string
+	 */
+	public function getProjectPart() {
+		return $this->projectPart;
 	}
 
 	/**

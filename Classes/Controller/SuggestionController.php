@@ -45,6 +45,7 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
 	public function initializeAction() {		
         session_start();
 
+		$this->labelRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_LabelRepository');
 		$this->suggestionRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_SuggestionRepository');
 	}
 
@@ -54,6 +55,24 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
+        $langId = $_SESSION['l10nserver']['lang_id'];
+
+        $this->view->assign('labels', $this->labelRepository
+            ->getLabelsToApprove($langId));
+	}
+
+	/**
+	 * Process approved/canceled actions
+	 *
+	 * @param array of Suggestions
+	 */
+	public function processAction($suggestions) {
+        $processed = false;
+        
+        var_dump($suggestions);
+
+        //$this->redirect('index', 'Suggestion', NULL, 
+        //    array('suggestions_are_processed' => $processed));
 	}
 
 	/**

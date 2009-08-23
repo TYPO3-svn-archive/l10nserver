@@ -3,7 +3,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
+*  (c) 2009 Andriy Kushnarov <akushnarov@gmail.com>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -22,6 +22,7 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 
 /**
  * A repository for Labels
@@ -78,5 +79,51 @@ class Tx_L10nServer_Domain_Repository_SuggestionRepository extends Tx_Extbase_Pe
 			->execute();
 
         return empty($result) ? NULL : $result[0];
+	}
+
+    /**
+	 * Finds suggestions by current user for selected language
+	 *
+	 * @param int $langId
+	 * @return array of Tx_L10nServer_Domain_Model_Suggestion
+	 */
+	public function findNotApproved($langId, $labelId = 0) {
+        static $suggestions;
+        if (empty($suggestions)) {
+            $suggestions = array();
+        }
+
+        if (! $labelId) {
+            $query = $this->createQuery();
+            $result = $query->matching(
+                    $query->logicalAnd(
+                        $query->equals('lang_uid', $langId),
+                        $query->logicalNot(
+                            $query->equals('approved', 1) 
+                        )
+                    )
+                )
+                ->setOrderings(
+                    array('label_uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+                )
+                ->execute();
+            
+            $tmpLabelUid = 0;
+            $labelIds = array();
+            foreach ($result as $suggestion) {
+                $labelUid = $suggestion->getLabelUid();
+
+                if ($tmpLabelUid != $labelUid) {
+                    $tmpLabelUid = $labelUid;
+                    $labelIds[] = intval($labelUid);
+                }
+
+                $suggestions[$langId][$labelUid][] = $suggestion;
+            }
+            
+            return $labelIds;
+        } else {
+            return $suggestions[$langId][$labelId];
+        }
 	}
 }

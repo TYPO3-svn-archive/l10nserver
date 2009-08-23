@@ -3,7 +3,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
+*  (c) 2009 Andriy Kushnarov <akushnarov@gmail.com>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,6 +23,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+
 /**
  * A repository for Labels
  *
@@ -30,4 +31,47 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
 class Tx_L10nServer_Domain_Repository_LabelRepository extends Tx_Extbase_Persistence_Repository {
+    
+    /**
+     * Repository for suggestions
+     *
+     * @var Tx_L10nServer_Domain_Repository_SuggestionRepository
+     */
+    protected $suggestionRepository;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        parent::__construct();
+
+        $this->suggestionRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_SuggestionRepository');
+    }
+
+    /**
+	 * Get all labels with not approved suggestions 
+	 *
+	 * @param int $langId
+	 * @return array of Tx_L10nServer_Domain_Model_Label
+	 */
+	public function getLabelsToApprove($langId) {
+        $labels = array();
+
+        $result = $this->suggestionRepository->findNotApproved($langId);
+        foreach ($result as $key => $uid) {
+            $label = $this->findByUid($uid);
+
+            $label->setNum($key + 1);
+
+            $label->setProjectPart();
+            
+            $label->setSuggestionsToApprove(
+                $this->suggestionRepository->findNotApproved(
+                    $langId, $uid));
+
+            $labels[] = $label;
+        }
+
+        return $labels;
+	}
 }
