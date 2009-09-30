@@ -28,6 +28,7 @@
  *
  * @author Andriy Kushnarov <akushnarov@gmail.com>
  * @version $Id:$
+ * @author Andriy Kushnarov <akushnarov@gmail.com>
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  */
 class Tx_L10nServer_Controller_ProjectController extends Tx_Extbase_MVC_Controller_ActionController {

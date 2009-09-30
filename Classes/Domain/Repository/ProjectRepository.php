@@ -27,10 +27,11 @@
  * A Project repository
  *
  * @version $Id:$
+ * @author Andriy Kushnarov <akushnarov@gmail.com>
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
- * @scope prototype
  * @entity
+ * @author Andriy Kushnarov <akushnarov@gmail.com>
  */
 class Tx_L10nServer_Domain_Repository_ProjectRepository extends Tx_Extbase_Persistence_Repository {
 

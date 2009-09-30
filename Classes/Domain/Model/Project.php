@@ -27,9 +27,9 @@
  * A Project
  *
  * @version $Id:$
+ * @author Andriy Kushnarov <akushnarov@gmail.com>
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
- * @scope prototype
  * @entity
  */
 class Tx_L10nServer_Domain_Model_Project extends Tx_Extbase_DomainObject_AbstractEntity {
@@ -53,7 +53,7 @@ class Tx_L10nServer_Domain_Model_Project extends Tx_Extbase_DomainObject_Abstrac
 	 *
 	 * @var array
 	 */
-	protected $parts = array();
+	protected $labels = array();
 
 	/**
 	 * Number in the list table
@@ -132,39 +132,39 @@ class Tx_L10nServer_Domain_Model_Project extends Tx_Extbase_DomainObject_Abstrac
 	}
 
 	/**
-	 * Adds a part to this project
+	 * Adds a label to this project
 	 *
-	 * @param Tx_L10nServer_Domain_Model_Part $part
+	 * @param Tx_L10nServer_Domain_Model_Label $label
 	 * @return void
 	 */
-	public function addPart(Tx_L10nServer_Domain_Model_Part $part) {
-		$this->parts[] = $part;
+	public function addLabel(Tx_L10nServer_Domain_Model_Label $label) {
+		$this->labels[] = $label;
 	}
 
 	/**
-	 * Adds parts to this project
+	 * Adds label to this project
 	 *
-	 * @param array of Tx_L10nServer_Domain_Model_Part $part
+	 * @param array of Tx_L10nServer_Domain_Model_Label $label
 	 * @return void
 	 */
-	public function setParts($parts) {
-        foreach ($parts as $part) {
-            $this->addPart($part);
+	public function setParts($labels) {
+        foreach ($labels as $label) {
+            $this->addLabel($label);
         }
 	}
 
 	/**
-	 * Returns all parts from this project
+	 * Returns all labels for this project
 	 *
-	 * @return array of Tx_L10nServer_Domain_Model_Post
+	 * @return array of Tx_L10nServer_Domain_Model_Label
 	 */
-	public function getParts() {
+	public function getLabels() {
         $i = 1;
-        foreach ($this->parts as $part) {
-            $part->setNum($i++);
+        foreach ($this->labels as $label) {
+            $label->setNum($i++);
         }
 
-		return $this->parts;
+		return $this->label;
 	}
 
 	/**

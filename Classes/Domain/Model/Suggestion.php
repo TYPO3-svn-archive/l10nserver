@@ -27,6 +27,7 @@
  * A suggestion
  *
  * @version $Id:$
+ * @author Andriy Kushnarov <akushnarov@gmail.com>
  * @copyright Copyright belongs to the respective authors
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
  * @scope prototype
