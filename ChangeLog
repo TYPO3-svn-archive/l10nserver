@@ -1,0 +1,9 @@
+2009-10-07  Andriy Kushnarov  <akushnarov@gmail.com>
+
+	* New sources based on generated with extbase kickstarter
+
+2009-08-13  Ingo Renner  <ingo@typo3.org>
+
+	* Added a ChangeLog file
+	* Fixed registration Plugins
+

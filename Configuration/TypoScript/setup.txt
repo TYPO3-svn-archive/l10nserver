@@ -1,0 +1,2 @@
+plugin.tx_l10nserver.settings {
+}

@@ -1,0 +1,35 @@
+<h1 class="bodytext"><f:translate key="list_of_projects">Here is a list of projects:</f:translate></h1>
+<table border="1">
+    <tr>
+        <th><f:translate key="num">#</f:translate></th>
+        <th><f:translate key="project_name">Project name</f:translate></th>
+        <th><f:translate key="project_version">Project version</f:translate></th>
+        <th><f:translate key="project_description">Project description</f:translate></th>
+    </tr>
+<f:for each="{projects}" as="project" key="key">
+    <f:cycle values="{0: 'odd', 1: 'even'}" as="zebraClass">
+
+    <tr class='row_{zebraClass}'>
+        <td>{project.num}</td>
+        <td>
+            <f:link.action controller="Label" action="index" arguments="{project : project}">
+                {project.name}
+            </f:link.action>
+        </td>
+        <td>{project.version}</td>
+        <td>
+            <f:if condition="{project.description}">
+                <f:then>{project.description}</f:then>
+                <f:else>
+                    <span class="no_description">
+                        <f:translate key="no_description">no description</f:translate>
+                    </span>
+                </f:else>
+            </f:if>
+        </td>
+    </tr>
+
+    </f:cycle>
+</f:for>
+
+</table>

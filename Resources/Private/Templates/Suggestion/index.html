@@ -1,0 +1,67 @@
+
+<h1 class="bodytext">
+    <f:translate key="list_of_suggestions">List of suggestions:</f:translate>
+</h1>
+
+<f:if condition="{suggestions_are_processed}">
+    <div class="message">
+        <f:translate key="suggestions_are_processed">Suggestions are processed...</f:translate>
+    </div>
+</f:if>
+
+<f:form method="post" controller="Suggestion" action="process" name="processSuggestion" object="{suggestion}">
+    <table border="1" width="100%">
+        <tr>
+            <th><f:translate key="num">#</f:translate></th>
+            <th><f:translate key="project_part">Project &gt; Part</f:translate></th>
+            <th><f:translate key="english_text">English Text</f:translate></th>
+            <th>
+                <table border="1" width="100%">
+                    <tr>
+                        <th width="70%">
+                            <f:translate key="suggestions">Suggestions</f:translate>
+                        </th>
+                        <th width="15%">
+                            <f:translate key="approve">Approve</f:translate>
+                        </th>
+                        <th width="15%">
+                            <f:translate key="cancel">Cancel</f:translate>
+                        </th>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+        <f:for each="{labels}" as="label">
+            <tr>
+                <td>
+                    {label.num}
+                </td>
+                <td>
+                    <!-- TODO: implement    -->
+                    {label.projectPart}
+                </td>
+                <td>
+                    {label.description}
+                </td>
+                <td>
+                    <table border="1" width="100%">
+                        <f:for each="{label.suggestionsToApprove}" as="suggestion">
+                            <tr>
+                                <td width="70%">
+                                    {suggestion.suggestion}
+                                </td>
+                                <td width="15%">
+                                    <input type="radio" name="suggestions[{suggestion.uid}]" value="approve" />
+                                </td>
+                                <td width="15%">
+                                    <input type="radio" name="suggestions[{suggestion.uid}]" value="cancel" />
+                                </td>
+                            </tr>
+                        </f:for>
+                    </table>
+                </td>
+            </tr>
+        </f:for>
+    </table>
+    <f:form.submit value="{f:translate('Process' key='process')}" />
+</f:form>
