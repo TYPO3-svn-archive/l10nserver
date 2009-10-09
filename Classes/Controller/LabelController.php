@@ -51,6 +51,8 @@ class Tx_L10nServer_Controller_LabelController extends Tx_Extbase_MVC_Controller
 	public function indexAction(Tx_L10nServer_Domain_Model_Project $project) {
         // TODO: FlashMessage
 
+        var_dump($GLOBALS['TSFE']->loginUser, $GLOBALS['TSFE']->fe_user->user['uid']);
+
         $this->view->assign('project', $project);
         $this->view->assign('labels', 
             $this->labelRepository->findByProject($project));

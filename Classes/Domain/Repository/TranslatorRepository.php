@@ -24,12 +24,8 @@
 ***************************************************************/
 
 /**
- * An Translator: user that makes suggestion
- *
- * @version $Id:$
- * @scope prototype
- * @entity
+ * A repository for Translators
  */
-class Tx_L10nServer_Domain_Model_Translator extends Tx_Extbase_Domain_Model_FrontendUser {
+class Tx_L10nServer_Domain_Repository_TranslatorRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository {
 
 }

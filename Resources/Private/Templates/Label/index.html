@@ -1,69 +1,73 @@
-<h1 class="bodytext">
-    <f:translate key="list_of_labels">List of labels for the project:</f:translate> "{project.name}"
-</h1>
+<f:layout name="default" />
 
-<f:form method="post" controller="Suggestion" action="add" name="addSuggestion" object="{suggestion}" arguments="{project: project}" >
-    <table border="1">
-        <tr>
-            <th><f:translate key="num">#</f:translate></th>
-            <th><f:translate key="english_text">English Text</f:translate></th>
-            <th><f:translate key="approved_translation">Approved translation</f:translate></th>
-            <th><f:translate key="translate">Translate</f:translate></th>
-        </tr>
-        <f:if condition="{labels}">
-            <f:then>
-                <f:for each="{labels}" as="label">
-                    <tr alt="{label.filePath}">
-                        <td>
-                            {label.num}
-                        </td>
-                        <td>
-                            {label.englishText}
-                        </td>
-                        <td>
-                            <f:if condition="{label.approvedTranslation}">
-                                <f:then>{label.approvedTranslation}</f:then>
-                                <f:else>&nbsp;</f:else>
-                            </f:if>
-                        </td>
-                        <td>
-                            <f:form.textbox name="suggestion[{label.uid}]" value="{label.userSuggestion}" />
-                            <div class="suggestions">
-                                <div class="other_suggestions">
-                                    <f:translate key="other_suggestions">Other suggestions:</f:translate>
+<f:section name="content">
+    <h1 class="bodytext">
+        <f:translate key="list_of_labels">List of labels for the project:</f:translate> "{project.name}"
+    </h1>
+
+    <f:form method="post" controller="Suggestion" action="add" name="addSuggestion" object="{suggestion}" arguments="{project: project}" >
+        <table border="1">
+            <tr>
+                <th><f:translate key="num">#</f:translate></th>
+                <th><f:translate key="english_text">English Text</f:translate></th>
+                <th><f:translate key="approved_translation">Approved translation</f:translate></th>
+                <th><f:translate key="translate">Translate</f:translate></th>
+            </tr>
+            <f:if condition="{labels}">
+                <f:then>
+                    <f:for each="{labels}" as="label">
+                        <tr alt="{label.filePath}">
+                            <td>
+                                {label.num}
+                            </td>
+                            <td>
+                                {label.englishText}
+                            </td>
+                            <td>
+                                <f:if condition="{label.approvedTranslation}">
+                                    <f:then>{label.approvedTranslation}</f:then>
+                                    <f:else>&nbsp;</f:else>
+                                </f:if>
+                            </td>
+                            <td>
+                                <f:form.textbox name="suggestion[{label.uid}]" value="{label.userSuggestion}" />
+                                <div class="suggestions">
+                                    <div class="other_suggestions">
+                                        <f:translate key="other_suggestions">Other suggestions:</f:translate>
+                                    </div>
+                                    <div class="other_suggestions_list">
+                                        <f:if condition="{label.otherSuggestions}">
+                                            <f:then>
+                                                <f:for each="{label.otherSuggestions}" as="suggestion">
+                                                    "{suggestion.translation}" &nbsp;
+                                                </f:for>
+                                            </f:then>
+                                            <f:else>
+                                                <span class="suggestions_no_data">
+                                                    <f:translate key="no_data">No data</f:translate>
+                                                </span>
+                                            </f:else>
+                                        </f:if>
+                                    </div>
                                 </div>
-                                <div class="other_suggestions_list">
-                                    <f:if condition="{label.otherSuggestions}">
-                                        <f:then>
-                                            <f:for each="{label.otherSuggestions}" as="suggestion">
-                                                "{suggestion.translation}" &nbsp;
-                                            </f:for>
-                                        </f:then>
-                                        <f:else>
-                                            <span class="suggestions_no_data">
-                                                <f:translate key="no_data">No data</f:translate>
-                                            </span>
-                                        </f:else>
-                                    </f:if>
-                                </div>
-                            </div>
+                            </td>
+                        </tr>
+                    </f:for>
+                </f:then>
+
+                <f:else>
+                    <tr>
+                        <td class="table_no_data" colspan="4">
+                            <f:translate key="no_data">No data</f:translate>
                         </td>
                     </tr>
-                </f:for>
-            </f:then>
+                </f:else>
 
-            <f:else>
-                <tr>
-                    <td class="table_no_data" colspan="4">
-                        <f:translate key="no_data">No data</f:translate>
-                    </td>
-                </tr>
-            </f:else>
-
-        </f:if>
-    </table>
-    <f:form.submit value="{f:translate('Update' key='update')}" />
-</f:form>
-<f:link.action controller="Project" action="index">
-    <f:translate key="back">&lt;&lt; Back</f:translate>
-</f:link.action>
+            </f:if>
+        </table>
+        <f:form.submit value="{f:translate('Update' key='update')}" />
+    </f:form>
+    <f:link.action controller="Project" action="index">
+        <f:translate key="back">&lt;&lt; Back</f:translate>
+    </f:link.action>
+</f:section>

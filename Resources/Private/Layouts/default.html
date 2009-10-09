@@ -1,0 +1,20 @@
+{namespace l10nserver=Tx_L10nServer_ViewHelpers}
+
+<h1>L10n Server</h1>
+<hr />
+
+<div class="languagesList">
+    <f:translate key="you_are_translating_into">
+        You are translating into:
+    </f:translate>
+    <l10nserver:userLanguages 
+        name="userLanguage" 
+        options=""
+        onChange="location.href += '&l10nserver[language]=' + this.value " />
+</div>
+
+<f:renderFlashMessages class="tx-extbase-flash-message" />
+<f:render section="content" />
+
+<hr />
+<p>&copy; TYPO3 Association</p>
