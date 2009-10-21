@@ -7,7 +7,7 @@ class Tx_L10nServer_ViewHelpers_UserLanguagesViewHelper extends Tx_Fluid_ViewHel
 	public function initializeArguments() {
 		parent::initializeArguments();
 
-		$this->registerTagAttribute('onChange', 'string', 'JavaScript:onChange');
+		$this->registerTagAttribute('onChange', 'string', 'JavaScript: onChange action');
         
         $this->setOptions();
         $this->setSelectedValue();
@@ -35,6 +35,8 @@ class Tx_L10nServer_ViewHelpers_UserLanguagesViewHelper extends Tx_Fluid_ViewHel
     public function render() {
         $this->viewHelperVariableContainer
             ->add('Tx_Fluid_ViewHelpers_FormViewHelper', 'fieldNamePrefix', '');
+        $this->viewHelperVariableContainer
+            ->add('Tx_Fluid_ViewHelpers_FormViewHelper', 'formFieldNames', '');
 
         return parent::render();
     }

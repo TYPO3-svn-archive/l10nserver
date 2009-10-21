@@ -32,7 +32,7 @@
 class Tx_L10nserver_Domain_Repository_SuggestionRepository extends Tx_Extbase_Persistence_Repository {
 
 	/**
-	 * Finds most labels by the specified project
+	 * Finds labels by the specified project
 	 *
 	 * @param Tx_L10nServer_Domain_Model_Project $project The project the label must refer to
 	 * @return array The labels
@@ -45,5 +45,29 @@ class Tx_L10nserver_Domain_Repository_SuggestionRepository extends Tx_Extbase_Pe
             ->matching($query->equals('label_uid', $label))
             ->execute();
 	}
+    
+	/**
+	 * Finds labels by the specified params
+	 *
+	 * @param int Label id
+	 * @param int Translator id
+	 * @param int Language id
+	 * @return array The labels
+	 */
+    public function findByUserAndLang($label, $translator, $language) {
+		$query = $this->createQuery();
+        
+        $result = $query
+            ->matching(
+                $query->logicalAnd(
+                    $query->logicalAnd(
+                        $query->equals('translator', $translator),
+                        $query->equals('language', $language)
+                    ),
+                $query->equals('label_uid', $label)))
+			->setLimit(1)
+			->execute();
 
+        return empty($result) ? NULL : $result[0];
+    }
 }

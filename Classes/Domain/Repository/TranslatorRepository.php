@@ -27,5 +27,4 @@
  * A repository for Translators
  */
 class Tx_L10nServer_Domain_Repository_TranslatorRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository {
-
 }

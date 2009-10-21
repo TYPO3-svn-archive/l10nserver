@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c)  TODO - INSERT COPYRIGHT
+*  (c) 2009 Andriy Kushnarov <akushnarov@gmail.com>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -65,13 +65,31 @@ class Tx_L10nserver_Domain_Model_Suggestion extends Tx_Extbase_DomainObject_Abst
 	 * @var Tx_L10nserver_Domain_Model_Language
 	 */
 	protected $language;
+
+	/**
+	 * 
+	 * @var Tx_L10nserver_Domain_Model_Language
+	 */
+	protected $label_uid;
 	
 
 	/**
 	 * Constructor. Initializes all Tx_Extbase_Persistence_ObjectStorage instances.
 	 */
-	public function __construct() {
-		
+	public function __construct($suggestion = '', $label = 0, $translator = 0, $lang = 0, $approved = 0) {
+	    if (! empty($suggestion)) {
+            $this->setTranslation($suggestion);
+
+            $this->setDatetime(new DateTime);
+
+            $this->setTranslator($translator);
+            $this->setLanguage($lang);
+            $this->setApproved($approved);
+
+            if ($label > 0) {
+                $this->setLabelUid($label);
+            }
+        }
 	}
 	
 	/**
@@ -89,7 +107,7 @@ class Tx_L10nserver_Domain_Model_Suggestion extends Tx_Extbase_DomainObject_Abst
 	 * @param string $translation 
 	 * @return void
 	 */
-	public function setTranslation( $translation) {
+	public function setTranslation($translation) {
 		$this->translation = $translation;
 	}
 	
@@ -165,7 +183,17 @@ class Tx_L10nserver_Domain_Model_Suggestion extends Tx_Extbase_DomainObject_Abst
 	 * @param Tx_L10nserver_Domain_Model_Language $language 
 	 * @return void
 	 */
-	public function setLanguage(Tx_L10nserver_Domain_Model_Language $language) {
+	public function setLanguage($language) {
 		$this->language = $language;
+	}
+
+	/**
+	 * Setter for label_uid
+	 *
+	 * @param int $label_uid 
+	 * @return void
+	 */
+	public function setLabelUid($label) {
+		$this->label_uid = $label;
 	}
 }

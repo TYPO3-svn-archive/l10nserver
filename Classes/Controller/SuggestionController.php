@@ -38,16 +38,51 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
 	protected $suggestionRepository;
 
 	/**
+	 * @var Tx_L10nServer_Domain_Repository_LabelRepository
+	 */
+	protected $labelRepository;
+
+	/**
+	 * @var int
+	 */
+	protected $langId = 0;
+
+	/**
+	 * @var int
+	 */
+	protected $translatorId = 0;
+
+	/**
 	 * Initializes the current action and repositories
 	 *
 	 * @return void
 	 */
 	public function initializeAction() {		
-        session_start();
-
 		$this->labelRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_LabelRepository');
+
 		$this->suggestionRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_SuggestionRepository');
+		$this->translatorRepository = t3lib_div::makeInstance('Tx_L10nServer_Domain_Repository_TranslatorRepository');
+        
+        $this->setVars();
 	}
+    
+    //  TODO: validate lang
+    protected function setVars() {
+        @session_start();
+
+        $this->langId = !empty($_SESSION['l10nserver']['language']) ? 
+            $_SESSION['l10nserver']['language'] : '';
+
+        //  Throw exception if not registered user
+        //  TODO Important: translator should have pid (fe_user.pid) same as plugin
+        //  TODO: Check if user is in appropriate group: translator (if seted in TypoScript) or ChifTranslator 
+        if (
+            ! $this->translator = $this->translatorRepository
+                ->findByUid(intval($GLOBALS['TSFE']->fe_user->user['uid']))
+        ) {
+            throw new Exception('Unregistered user');
+        }
+    }
 
 	/**
 	 * Index action for this controller. Displays a list of projects.
@@ -55,10 +90,6 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
 	 * @return string The rendered view
 	 */
 	public function indexAction() {
-        $langId = $_SESSION['l10nserver']['lang_id'];
-
-        $this->view->assign('labels', $this->labelRepository
-            ->getLabelsToApprove($langId));
 	}
 
 	/**
@@ -67,12 +98,6 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
 	 * @param array of Suggestions
 	 */
 	public function processAction($suggestions) {
-        $processed = false;
-        
-        var_dump($suggestions);
-
-        //$this->redirect('index', 'Suggestion', NULL, 
-        //    array('suggestions_are_processed' => $processed));
 	}
 
 	/**
@@ -82,32 +107,29 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
 	 *
 	 * @return void
 	 */
-	public function addAction(Tx_L10nServer_Domain_Model_Project $project, Tx_L10nServer_Domain_Model_Part $part) {
+	public function addAction(Tx_L10nServer_Domain_Model_Project $project) {
         $added = false;
+
         $userSuggestions = $this->request->getArguments();
-
-        $userId = $_SESSION['l10nserver']['user_id'];
-        $langId = $_SESSION['l10nserver']['lang_id'];
-
         foreach ($userSuggestions['suggestion'] as $labelId => $suggestion) {
-            if (empty($suggestion)) {
+            $labelId = intval($labelId);
+            if (empty($suggestion) || $labelId <= 0) {
                 continue;
             }
             
-            $userSuggestion = $this->suggestionRepository->
-                findByUserAndLang($labelId, $userId, $langId);
+            $currentSuggestion = $this->suggestionRepository->
+                findByUserAndLang($labelId, $this->translatorId, $this->langId);
 
-            if (!empty($userSuggestion)) {
-                $userSuggestion->setSuggestion($suggestion);
+            if (!empty($currentSuggestion)) {
+                $currentSuggestion->setSuggestion($suggestion);
             } else {
-                $userSuggestion = t3lib_div::makeInstance('Tx_L10nServer_Domain_Model_Suggestion', 
-                    $suggestion, 
-                    $labelId, 
-                    $userId,
-                    $langId
-                );
-                
-                $this->suggestionRepository->add($userSuggestion);
+                $currentSuggestion = t3lib_div::makeInstance('Tx_L10nServer_Domain_Model_Suggestion', 
+                    $suggestion, NULL, $this->translator, $this->langId);
+
+                $label = $this->labelRepository->findByUid($labelId);
+                if (! empty($label)) {
+                    $label->addSuggestion($currentSuggestion);
+                }
             }
 
             $added = true;
@@ -115,8 +137,11 @@ class Tx_L10nServer_Controller_SuggestionController extends Tx_Extbase_MVC_Contr
 
         /**
          * After suggestions are added redirect to labels list
+         * + flash message: Suggestions was added
          */
-        $this->redirect('index', 'Label', NULL, 
-            array('project' => $project, 'part' => $part, 'suggestions_are_added' => $added));
+        if ($added) {
+		    $this->flashMessages->add('TODO LL:suggestion_was_added');
+        }
+        $this->redirect('index', 'Label', NULL, array('project' => $project));
 	}
 }

@@ -232,10 +232,10 @@ $TCA['tx_l10nserver_domain_model_label'] = array(
 $TCA['tx_l10nserver_domain_model_suggestion'] = array(
 	'ctrl' => $TCA['tx_l10nserver_domain_model_suggestion']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'translation,approved,translator'
+		'showRecordFieldList' => 'translation,approved,translator,language'
 	),
 	'types' => array(
-		'1' => array('showitem' => 'translation,approved,translator')
+		'1' => array('showitem' => 'translation,approved,translator,language')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')
@@ -316,6 +316,16 @@ $TCA['tx_l10nserver_domain_model_suggestion'] = array(
 				'foreign_class' => 'Tx_L10nServer_Domain_Model_Translator',
 //				'foreign_table_where' => 'AND fe_users.pid=###STORAGE_PID###',
 				'maxitems' => 1,
+			)
+		),
+
+		'language' => array(
+			'exclude' => 0,
+			'label'   => 'language',
+			'config'  => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim,required'
 			)
 		),
 		
