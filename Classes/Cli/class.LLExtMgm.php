@@ -1,17 +1,5 @@
 <?php
 
-define('TYPO3ROOT', realpath(dirname(__FILE__). '../../../../../../'));
-
-if(! isset($GLOBALS['TYPO3_CONF_VARS'])) {
-    $GLOBALS['TYPO3_CONF_VARS'] = array();
-}
-
-if(! isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['curlUse'])) {
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['curlUse'] = 0;
-}
-
-
-require_once(TYPO3ROOT. '/t3lib/class.t3lib_div.php');
 
 class Tx_L10nserver_Cli_LLExtMgm {
     /**
